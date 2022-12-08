@@ -20,6 +20,7 @@ body {
     color: $Dcream;
     font-family: 'Work Sans', sans-serif;
     height: 100vh;
+    user-select: none;
 }
 
 .container {
@@ -34,6 +35,13 @@ body {
         font-weight: 700;
         font-size: 2rem;
         text-align: center;
+    }
+
+    &_playarea {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
     }
 
     &_players {
