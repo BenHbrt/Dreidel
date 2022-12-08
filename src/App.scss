@@ -1,6 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap');
+
 @import './Other/Variables.scss';
 
-.dreidel {
-    font-size: 2em;
-    color: $Dlightblue;
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    background-color: $Dblue;
+    color: $Dcream;
+    font-family: 'Work Sans', sans-serif;
+    height: 100vh;
+}
+
+.container {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: red;
+    height: 100vh;
+
+    &_title {
+        margin: 1rem 0;
+        font-weight: 700;
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    &_players {
+        display: grid;
+        grid-template-columns: auto auto;
+
+        &_player {
+            text-align: center;
+        }
+    }
+    
 }
