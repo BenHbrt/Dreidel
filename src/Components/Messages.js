@@ -1,11 +1,11 @@
 import './Messages.scss';
 
-const Messages = () => {
+const Messages = ({ message1, message2, message3 }) => {
     return (
         <div className="messages">
-            <div>Fred wins 5!</div>
-            <div>Jana is out of the game!</div>
-            <div>It's now Marek's turn.</div>
+            <div className={`${message1 === "NONE" ? "hidden" : ""}`}>{message1}</div>
+            <div className={`${message2 === "NONE" ? "hidden" : ""}`}>{message2}</div>
+            <div className={`${message3 === "NONE" ? "hidden" : ""}`}>{message3}</div>
         </div>
     )
 }

@@ -1,13 +1,11 @@
 import './Pot.scss';
 
-const Pot = () => {
-
-    const geld = 2
+const Pot = ({ data }) => {
 
     return (
         <div className="pot">
             <div className="pot_name">Pot</div>
-            <div className="player_geld">Geld: <span>{geld}</span></div>
+            <div className="player_geld">Geld: <span>{data}</span></div>
         </div>
     )
 }

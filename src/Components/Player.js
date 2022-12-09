@@ -1,14 +1,11 @@
 import './Player.scss';
 
-const Player = () => {
-
-    const name = "Fred"
-    const geld = 2
+const Player = ({ data, position, turn }) => {
 
     return (
-        <div className="player">
-            <div className="player_name">{name}</div>
-            <div className="player_geld">Geld: <span>{geld}</span></div>
+        <div className={`player${position === turn ? " turn" : ""}`}>
+            <div className="player_name">{data.name}</div>
+            <div className="player_geld">Geld: <span>{data.geld}</span></div>
         </div>
     )
 }
