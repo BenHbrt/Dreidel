@@ -1,5 +1,22 @@
 @import '../Other/Variables.scss';
 
+@keyframes rotating {
+    from {
+      -ms-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    to {
+      -ms-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+}
+
 .dreidel {
     height: 100%;
     display: flex;
@@ -11,7 +28,21 @@
         border: 2px solid $Dcream;
         font-size: 7rem;
         padding: 1rem;
-        border-radius: 1rem;;
+        border-radius: 1rem;
+        width: 120px;
+        height: 170px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & svg {
+            fill: $Dcream;
+            -webkit-animation: rotating 2s linear infinite;
+            -moz-animation: rotating 2s linear infinite;
+            -ms-animation: rotating 2s linear infinite;
+            -o-animation: rotating 2s linear infinite;
+            animation: rotating 2s linear infinite;
+        }
     }
 
     &_button {
