@@ -116,18 +116,21 @@ function App() {
       } else if (letter === 3) {
         // SHIN
         setMessage1(`${letters[letter]} - Shin! ${players[turn].name} puts one in!`)
+        let out = {}
         const updated = players.map((player, i) => {
           if (i === turn) {
             const newGeld = player.geld -1
             if (newGeld > 0) {
               return {name: player.name, geld: newGeld, playing: player.playing}
             } else {
+              out = player
               return {name: player.name, geld: 0, playing: false}
             }  
           } else {
             return player
           }
         })
+        setMessage4(`${out.name} is out of the game!`)
         setPlayers(updated)
         setPot(pot + 1)
       } 
@@ -137,15 +140,18 @@ function App() {
   useEffect(() => {
     if (message2 === "NONE" && pot <= 1) {
       setMessage2(`The pot needs geld! Everyone put one in!`) 
-      
+      let out = {}
       const updated = players.map((player) => {
+        
         const newGeld = player.geld -1
         if (newGeld > 0) {
           return {name: player.name, geld: (player.geld -1), playing: player.playing}
         } else {
+          out = player
           return {name: player.name, geld: 0, playing: false}
         }
       })
+      setMessage4(`${out.name} is out of the game!`)
       setPlayers(updated)
       setPot(pot + currentPlayers())
     }
