@@ -4,13 +4,17 @@ import Player from './Components/Player';
 import Dreidel from './Components/Dreidel';
 import Pot from './Components/Pot';
 import Messages from './Components/Messages';
+import Winner from './Components/Winner'
 
 import { useState, useEffect, useRef } from 'react'
 
 function App() {
 
+  // const [players, setPlayers] = useState([
+  //   {name: "Bob", geld: 2, playing: true}, {name: "Jana", geld: 2, playing: true}, {name: "Julie", geld: 2, playing: true}, {name: "Fred", geld: 2, playing: true}, {name: "Honza", geld: 2, playing: true}
+  // ])
   const [players, setPlayers] = useState([
-    {name: "Bob", geld: 2, playing: true}, {name: "Jana", geld: 2, playing: true}, {name: "Julie", geld: 2, playing: true}, {name: "Fred", geld: 2, playing: true}, {name: "Honza", geld: 2, playing: true}
+    {name: "Bob", geld: 2, playing: true}
   ])
   const [pot, setPot] = useState(5)
   const letters = ["נ", "ג", "ה", "ש", "A"] 
@@ -162,16 +166,19 @@ function App() {
   return (
     <div className="container">
       <div className="container_title">Dreidel</div>
-      <div className="container_playarea">
-        <Messages message1={message1} message2={message2} message3={message3} message4={message4}/>
-        <Dreidel spinning={spinning} spin={spin} letter={letter} letters={letters} />
-        <Pot data={pot} />
-      </div>
-      <div className="container_players">
-        {players && players.map((player, i) => {
-          return <Player key={i} data={player} position={i} turn={turn} winner={winner}/>
-        })}
-      </div>
+      {winner && <Winner winner={winner} />}
+      {!winner && <div className='container_playing'>
+        <div className="container_playing_playarea">
+          <Messages message1={message1} message2={message2} message3={message3} message4={message4}/>
+          <Dreidel spinning={spinning} spin={spin} letter={letter} letters={letters} />
+          <Pot data={pot} />
+        </div>
+        <div className="container_playing_players">
+          {players && players.map((player, i) => {
+            return <Player key={i} data={player} position={i} turn={turn} winner={winner}/>
+          })}
+        </div>
+      </div>}
     </div>
   );
 }

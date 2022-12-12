@@ -27,7 +27,6 @@ body {
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     height: 100vh;
 
     &_title {
@@ -37,20 +36,26 @@ body {
         text-align: center;
     }
 
-    &_playarea {
+    &_playing {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         height: 100%;
-    }
 
-    &_players {
-        display: grid;
-        grid-template-columns: auto auto;
-
-        &_player {
-            text-align: center;
+        &_playarea {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+    
+        &_players {
+            display: grid;
+            grid-template-columns: auto auto;
+    
+            &_player {
+                text-align: center;
+            }
         }
     }
-    
 }
