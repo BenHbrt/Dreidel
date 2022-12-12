@@ -14,7 +14,7 @@ function App() {
   //   {name: "Bob", geld: 2, playing: true}, {name: "Jana", geld: 2, playing: true}, {name: "Julie", geld: 2, playing: true}, {name: "Fred", geld: 2, playing: true}, {name: "Honza", geld: 2, playing: true}
   // ])
   const [players, setPlayers] = useState([
-    {name: "Bob", geld: 2, playing: true}
+    {name: "Bob", geld: 2, playing: true}, {name: "Honza", geld: 2, playing: true}, {name: "Jana", geld: 2, playing: true}
   ])
   const [pot, setPot] = useState(5)
   const letters = ["נ", "ג", "ה", "ש", "A"] 
