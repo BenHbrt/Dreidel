@@ -20,7 +20,7 @@ function App() {
   const [settings, setSettings] = useState(true)
   const [pot, setPot] = useState(5)
   const letters = ["נ", "ג", "ה", "ש", "A", "פ"] 
-  const dreidelType = useRef(true)
+  const [dreidelType, setDreidelType] = useState(false)
   const [letter, setLetter] = useState(4)
   const [spinning, setSpinning] = useState(false)
   const [turn, setTurn] = useState(0)
@@ -29,6 +29,8 @@ function App() {
   const [message3, setMessage3] = useState(`It's now ${players[turn].name}'s turn.`)
   const [message4, setMessage4] = useState("NONE")
   const turnCount = useRef(0)
+  const [startGeld, setStartGeld] = useState(10)
+  const [refreshPlayers, setRefreshPlayers] = useState(null)
   const [winner, setWinner] = useState(null)
   const currentPlayers = () => {
     let i = 0
@@ -60,13 +62,17 @@ function App() {
     setMessage3("NONE")
     setMessage4("NONE")
     var choice = Math.floor(Math.random() * 4)
-    if (choice === 3 && dreidelType.current === true) {
+    if (choice === 3 && dreidelType === true) {
       choice = 5
     }
     const timer = setTimeout(() => {
       setLetter(choice)
       setSpinning(false)    
     }, 10)
+  }
+
+  const startRefresh = () => {
+    setRefreshPlayers(players)
   }
 
   useEffect(() => {
@@ -202,10 +208,18 @@ function App() {
   useEffect(() => {
     if (settings === false) {
       setPot(currentPlayers())
+      setMessage1("NONE")
       setMessage3(`It's now ${players[turn].name}'s turn.`)
       setMessage2(`The pot needs geld! Everyone put one in!`) 
+      setMessage4("NONE")
+      setWinner(null)
+      setTurn(0)
     }
   }, [settings])
+
+  useEffect(() => {
+    setSettings(true)
+  }, [refreshPlayers])
 
   return (
     <div className="container">
@@ -214,13 +228,13 @@ function App() {
         <div className="button"><span>About</span></div>
         <div className="button"><span>Credits</span></div>
       </nav>
-      {settings && <PlayersSetup setSettings={setSettings} setPlayers={setPlayers} />}
+      {settings && <PlayersSetup setSettings={setSettings} setPlayers={setPlayers} refreshPlayers={refreshPlayers} dreidelType={dreidelType} setDreidelType={setDreidelType} startGeld={startGeld} setStartGeld={setStartGeld} />}
       {!settings && <div className='container_playing'>
         <div className="container_playing_playarea">
           <Messages message1={message1} message2={message2} message3={message3} message4={message4}/>
           {!winner && <><Dreidel spinning={spinning} spin={spin} letter={letter} letters={letters} type={dreidelType} />
           <Pot data={pot} /></>}
-          {winner && <><Winner winner={winner} /><Pot data={pot} winner={winner} /></>}
+          {winner && <><Winner winner={winner} func={startRefresh}/><Pot data={pot} winner={winner}  /></>}
         </div>
         <div className="container_playing_players">
           {players && players.map((player, i) => {

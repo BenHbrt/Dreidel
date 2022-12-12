@@ -1,27 +1,54 @@
 import './PlayersSetup.scss';
 
-import { useRef } from 'react'
+import { useState, useEffect } from 'react'
 
-const PlayersSetup = ({ setSettings, setPlayers }) => {
+const PlayersSetup = ({ setSettings, setPlayers, refreshPlayers, dreidelType, setDreidelType, startGeld, setStartGeld }) => {
 
-    const startGeld = useRef(10)
-    const newPlayers = useRef([])
+    // const [startGeld, setStartGeld] = useState(10)
+    const [newPlayers, setNewPlayers] = useState([])
+    const [newName, setNewName] = useState("")
     const final = []
 
-    const geldChange = (e) => {
-        startGeld.current = e.target.value;
+    useEffect(() => {
+        if (refreshPlayers) {
+            const array = []
+            refreshPlayers.forEach((player) => {
+                array.push(player.name)
+            })
+            setNewPlayers(array)
+        }
+    }, [])
+
+    const geldChange = (dir) => {
+        if (dir === "plus") {
+            if (startGeld < 20) {
+                setStartGeld(startGeld + 1)
+            }
+        } else if (dir === "minus") {
+            if (startGeld > 5) {
+                setStartGeld(startGeld - 1)
+            }
+        }
     }
 
     const inputName = (e) => {
-        newPlayers.current[e.target.name - 1] = e.target.value;
+        setNewName(e.target.value);
+    }
+
+    const addPlayer = () => {
+        const updated = newPlayers.map((player) => {
+            return player
+        })
+        updated.push(newName)
+        setNewPlayers(updated)
+        setNewName("")
     }
 
     const startGame = () => {
-        newPlayers.current = newPlayers.current.flat()
-        newPlayers.current.forEach(element => {
+        newPlayers.forEach(element => {
             final.push({
                 name: element,
-                geld: startGeld.current -1,
+                geld: startGeld -1,
                 playing: true
             })
         });
@@ -29,8 +56,38 @@ const PlayersSetup = ({ setSettings, setPlayers }) => {
         setSettings(false)
     }
 
+    const deleteItem = (index) => {
+        const updated = []
+        newPlayers.forEach((player, i) => {
+            if (i != index) {
+                updated.push(player)
+            } 
+        })
+        setNewPlayers(updated)
+    }
+
     return (
-        <div className="playersSetup">
+        <div className="playerssetup">
+            <div className='playerssetup_style'>Dreidel Style: <span onClick={() => {setDreidelType(false)}} className={`playerssetup_style_optionD${dreidelType === false ? " active" : ""}`}>Diaspora</span><span onClick={() => {setDreidelType(true)}} className={`playerssetup_style_optionI${dreidelType === true ? " active" : ""}`}>Israeli</span></div>
+            <div className='playerssetup_startgeld'>
+                <svg onClick={() => {geldChange("minus")}} className={`playerssetup_startgeld_button${startGeld <= 5 ? "-unactivated" : ""}`} xmlns="http://www.w3.org/2000/svg" height="20" width="20"><path d="M12 15.667 6.333 10 12 4.333l1.729 1.729L9.792 10l3.937 3.938Z"/></svg>
+                <span>{startGeld}</span>
+                <svg onClick={() => {geldChange("plus")}} className={`playerssetup_startgeld_button${startGeld >= 20 ? "-unactivated" : ""}`} xmlns="http://www.w3.org/2000/svg" height="20" width="20"><path d="m8 15.667-1.729-1.729L10.208 10 6.271 6.062 8 4.333 13.667 10Z"/></svg>
+            </div>
+            <div>Players</div>
+            <input type="text" name="newPlayer" value={newName} onChange={inputName}></input><span className="playerssetup_addbutton" onClick={addPlayer}>+ Add Player</span>
+            {newPlayers.length > 0 && newPlayers.map((player, i) => {
+                return <div className="playerssetup_player_item">{i + 1}: {player} <div onClick={() => deleteItem(i)}><svg xmlns="http://www.w3.org/2000/svg" height="20" width="20"><path d="M6.75 16.583q-.542 0-.938-.395-.395-.396-.395-.938V5.5h-1V4.417H8v-.896h4v.896h3.583V5.5h-1v9.729q0 .583-.385.969-.386.385-.948.385ZM13.5 5.5h-7v9.75q0 .104.073.177t.177.073h6.5q.083 0 .167-.083.083-.084.083-.167ZM8.333 14h1.084V7H8.333Zm2.25 0h1.084V7h-1.084ZM6.5 5.5v10-.25Z"/></svg></div></div>
+            })}
+            <br/>
+            <button onClick={startGame}>Start Game</button>
+            <button onClick={() => console.log(newPlayers)}>Pl</button>
+        </div>
+    )
+}
+export default PlayersSetup;
+
+{/* <div className="playersSetup">
             <h2>Setup</h2>
             <label>Player 1:</label>
             <input type="text" name={1} onChange={inputName}></input><br/>
@@ -47,7 +104,4 @@ const PlayersSetup = ({ setSettings, setPlayers }) => {
             <label>Starting Geld:</label>
             <input type="number" min="10" max="20" placeholder="10" onChange={geldChange}></input>
             <button onClick={startGame}>Start Game</button>
-        </div>
-    )
-}
-export default PlayersSetup;
+        </div> */}

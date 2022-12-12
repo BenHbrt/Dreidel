@@ -1,0 +1,96 @@
+@import '../Other/Variables.scss';
+
+.playerssetup {
+
+    &_style {
+
+        &_optionD {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        &_optionI {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    &_startgeld {
+
+        &_button {
+            fill: $Dcream;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            &-unactivated {
+                opacity: 0.5;
+            }
+        }
+
+        & > span {
+            font-weight: 700;
+        }
+    }
+
+    &_addbutton {
+        border: 1px solid $Dcream;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 1.5rem;
+        height: 1.3rem;
+        margin: 0 0.5rem;
+        padding: 0 0.5rem;
+
+        &:hover {
+            border-color: $Dlightblue;
+            background-color: $Dlightblue;
+            color: black;
+            cursor: pointer;
+        }
+    }
+
+    &_player {
+
+        &_item {
+            display: flex;
+            align-items: center;
+            margin: 0.2rem 0;
+
+            & div {
+                border: 1px solid $Dcream;
+                border-radius: 50%;
+                height: 23px;
+                width: 23px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-left: 0.5rem;
+
+                &:hover {
+                    border-color: $Dlightblue;
+                    background-color: $Dlightblue;
+                    color: black;
+                    cursor: pointer;
+                }
+
+                & > svg {
+                    fill: $Dcream;
+
+                    &:hover {
+                        fill: black;
+                        cursor: pointer;  
+                    }
+                }
+            }
+        }
+    }
+}
+
+.active {
+    font-weight: 700;
+}
