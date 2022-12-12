@@ -4,7 +4,8 @@ import Player from './Components/Player';
 import Dreidel from './Components/Dreidel';
 import Pot from './Components/Pot';
 import Messages from './Components/Messages';
-import Winner from './Components/Winner'
+import Winner from './Components/Winner';
+import PlayersSetup from './Components/PlayersSetup';
 
 import { useState, useEffect, useRef } from 'react'
 
@@ -16,6 +17,7 @@ function App() {
   // const [players, setPlayers] = useState([
   //   {name: "Bob", geld: 2, playing: true}, {name: "Honza", geld: 2, playing: true}, {name: "Jana", geld: 2, playing: true}
   // ])
+  const [settings, setSettings] = useState(true)
   const [pot, setPot] = useState(5)
   const letters = ["נ", "ג", "ה", "ש", "A"] 
   const [letter, setLetter] = useState(4)
@@ -180,6 +182,14 @@ function App() {
     setMessage3("NONE")
   }, [winner])
 
+  useEffect(() => {
+    if (settings === false) {
+      setPot(currentPlayers())
+      setMessage3(`It's now ${players[turn].name}'s turn.`)
+      setMessage2(`The pot needs geld! Everyone put one in!`) 
+    }
+  }, [settings])
+
   return (
     <div className="container">
       <div className="container_title">Dreidel</div>
@@ -187,7 +197,8 @@ function App() {
         <div className="button"><span>About</span></div>
         <div className="button"><span>Credits</span></div>
       </nav>
-      <div className='container_playing'>
+      {settings && <PlayersSetup setSettings={setSettings} setPlayers={setPlayers} />}
+      {!settings && <div className='container_playing'>
         <div className="container_playing_playarea">
           <Messages message1={message1} message2={message2} message3={message3} message4={message4}/>
           {!winner && <><Dreidel spinning={spinning} spin={spin} letter={letter} letters={letters} />
@@ -201,7 +212,7 @@ function App() {
         </div>
         {/* <button onClick={() => {console.log(players)}}>Players</button>
         <button onClick={() => {console.log(currentPlayers())}}>CurrentPlayers</button> */}
-      </div>
+      </div>}
     </div>
   );
 }
