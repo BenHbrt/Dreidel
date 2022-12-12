@@ -19,7 +19,8 @@ function App() {
   // ])
   const [settings, setSettings] = useState(true)
   const [pot, setPot] = useState(5)
-  const letters = ["נ", "ג", "ה", "ש", "A"] 
+  const letters = ["נ", "ג", "ה", "ש", "A", "פ"] 
+  const dreidelType = useRef(true)
   const [letter, setLetter] = useState(4)
   const [spinning, setSpinning] = useState(false)
   const [turn, setTurn] = useState(0)
@@ -38,15 +39,6 @@ function App() {
     })
     return i
   }
-
-  // const changeTurn = (i) => {
-  //   if (i < (currentPlayers.length - 1)) {
-  //     i++
-  //   } else {
-  //     i = 0
-  //   }
-  //   return i
-  // }
 
   const changeTurn = (i) => {
     do {
@@ -67,7 +59,10 @@ function App() {
     setMessage2("NONE")
     setMessage3("NONE")
     setMessage4("NONE")
-    const choice = Math.floor(Math.random() * 4)
+    var choice = Math.floor(Math.random() * 4)
+    if (choice === 3 && dreidelType.current === true) {
+      choice = 5
+    }
     const timer = setTimeout(() => {
       setLetter(choice)
       setSpinning(false)    
@@ -118,6 +113,28 @@ function App() {
       } else if (letter === 3) {
         // SHIN
         setMessage1(`${letters[letter]} - Shin! ${players[turn].name} puts one in!`)
+        let out = {}
+        const updated = players.map((player, i) => {
+          if (i === turn) {
+            const newGeld = player.geld -1
+            if (newGeld > 0) {
+              return {name: player.name, geld: newGeld, playing: player.playing}
+            } else {
+              out = player
+              return {name: player.name, geld: 0, playing: false}
+            }  
+          } else {
+            return player
+          }
+        })
+        if (out.name != undefined) {
+          setMessage4(`${out.name} is out of the game!`)
+        }
+        setPlayers(updated)
+        setPot(pot + 1)
+      } else if (letter === 5) {
+        // PE
+        setMessage1(`${letters[letter]} - Pe! ${players[turn].name} puts one in!`)
         let out = {}
         const updated = players.map((player, i) => {
           if (i === turn) {
@@ -201,7 +218,7 @@ function App() {
       {!settings && <div className='container_playing'>
         <div className="container_playing_playarea">
           <Messages message1={message1} message2={message2} message3={message3} message4={message4}/>
-          {!winner && <><Dreidel spinning={spinning} spin={spin} letter={letter} letters={letters} />
+          {!winner && <><Dreidel spinning={spinning} spin={spin} letter={letter} letters={letters} type={dreidelType} />
           <Pot data={pot} /></>}
           {winner && <><Winner winner={winner} /><Pot data={pot} winner={winner} /></>}
         </div>
