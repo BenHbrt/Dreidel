@@ -59,3 +59,30 @@ body {
         }
     }
 }
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+
+    & > div {
+        border: 1px solid $Dcream;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 1.5rem;
+        height: 1.3rem;
+        margin: 0 0.5rem;
+
+        &:hover {
+            border-color: $Dlightblue;
+            background-color: $Dlightblue;
+            color: black;
+            cursor: pointer;
+        }
+
+        & > span {
+            margin: 0 0.5rem;
+        }
+    }
+}

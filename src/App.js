@@ -10,12 +10,12 @@ import { useState, useEffect, useRef } from 'react'
 
 function App() {
 
-  // const [players, setPlayers] = useState([
-  //   {name: "Bob", geld: 2, playing: true}, {name: "Jana", geld: 2, playing: true}, {name: "Julie", geld: 2, playing: true}, {name: "Fred", geld: 2, playing: true}, {name: "Honza", geld: 2, playing: true}
-  // ])
   const [players, setPlayers] = useState([
-    {name: "Bob", geld: 2, playing: true}, {name: "Honza", geld: 2, playing: true}, {name: "Jana", geld: 2, playing: true}
+    {name: "Bob", geld: 2, playing: true}, {name: "Jana", geld: 2, playing: true}, {name: "Julie", geld: 2, playing: true}, {name: "Fred", geld: 2, playing: true}, {name: "Honza", geld: 2, playing: true}
   ])
+  // const [players, setPlayers] = useState([
+  //   {name: "Bob", geld: 2, playing: true}, {name: "Honza", geld: 2, playing: true}, {name: "Jana", geld: 2, playing: true}
+  // ])
   const [pot, setPot] = useState(5)
   const letters = ["נ", "ג", "ה", "ש", "A"] 
   const [letter, setLetter] = useState(4)
@@ -130,7 +130,9 @@ function App() {
             return player
           }
         })
-        setMessage4(`${out.name} is out of the game!`)
+        if (out.name != undefined) {
+          setMessage4(`${out.name} is out of the game!`)
+        }
         setPlayers(updated)
         setPot(pot + 1)
       } 
@@ -144,14 +146,18 @@ function App() {
       const updated = players.map((player) => {
         
         const newGeld = player.geld -1
-        if (newGeld > 0) {
-          return {name: player.name, geld: (player.geld -1), playing: player.playing}
-        } else {
+        if (newGeld > 0 && player.playing === true) {
+          return {name: player.name, geld: newGeld, playing: player.playing}
+        } else if (player.playing === true) {
           out = player
           return {name: player.name, geld: 0, playing: false}
+        } else {
+          return player
         }
       })
-      setMessage4(`${out.name} is out of the game!`)
+      if (out.name != undefined) {
+        setMessage4(`${out.name} is out of the game!`)
+      }
       setPlayers(updated)
       setPot(pot + currentPlayers())
     }
@@ -165,26 +171,37 @@ function App() {
           win = player
         }
       })
+
       setWinner(win)
     }
   }, [players])
 
+  useEffect(() => {
+    setMessage3("NONE")
+  }, [winner])
+
   return (
     <div className="container">
       <div className="container_title">Dreidel</div>
-      {winner && <Winner winner={winner} />}
-      {!winner && <div className='container_playing'>
+      <nav>
+        <div className="button"><span>About</span></div>
+        <div className="button"><span>Credits</span></div>
+      </nav>
+      <div className='container_playing'>
         <div className="container_playing_playarea">
           <Messages message1={message1} message2={message2} message3={message3} message4={message4}/>
-          <Dreidel spinning={spinning} spin={spin} letter={letter} letters={letters} />
-          <Pot data={pot} />
+          {!winner && <><Dreidel spinning={spinning} spin={spin} letter={letter} letters={letters} />
+          <Pot data={pot} /></>}
+          {winner && <><Winner winner={winner} /><Pot data={pot} winner={winner} /></>}
         </div>
         <div className="container_playing_players">
           {players && players.map((player, i) => {
             return <Player key={i} data={player} position={i} turn={turn} winner={winner}/>
           })}
         </div>
-      </div>}
+        {/* <button onClick={() => {console.log(players)}}>Players</button>
+        <button onClick={() => {console.log(currentPlayers())}}>CurrentPlayers</button> */}
+      </div>
     </div>
   );
 }
