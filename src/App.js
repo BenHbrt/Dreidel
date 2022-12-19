@@ -68,7 +68,7 @@ function App() {
     const timer = setTimeout(() => {
       setLetter(choice)
       setSpinning(false)    
-    }, 10)
+    }, 1500)
   }
 
   const startRefresh = () => {
