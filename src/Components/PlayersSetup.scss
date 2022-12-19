@@ -1,39 +1,73 @@
 @import '../Other/Variables.scss';
 
 .playerssetup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
 
     &_style {
 
         &_optionD {
+
+            margin: 0 1rem;
+            border: 1px solid $Dcream;
+            border-radius: 1.3rem;
+            padding: 0 0.5rem;
+            width: 5.375rem;
+
             &:hover {
                 cursor: pointer;
+                border-color: $Dlightblue;
+                background-color: $Dlightblue;
+                color: black;
             }
         }
 
         &_optionI {
+            border: 1px solid $Dcream;
+            border-radius: 1.3rem;
+            padding: 0 0.5rem;
+            width: 4.1875rem;
+
             &:hover {
                 cursor: pointer;
+                border-color: $Dlightblue;
+                background-color: $Dlightblue;
+                color: black;
             }
         }
     }
 
     &_startgeld {
+        margin-top: 0.5rem;
+        display: flex;
 
-        &_button {
-            fill: $Dcream;
+        &_buttons {
+            display: flex;
 
-            &:hover {
-                cursor: pointer;
+            &_button {
+                fill: $Dcream;
+    
+                &:hover {
+                    cursor: pointer;
+                }
+    
+                &-unactivated {
+                    opacity: 0.5;
+                }
             }
-
-            &-unactivated {
-                opacity: 0.5;
+    
+            & > span {
+                font-weight: 700;
             }
         }
+    }
 
-        & > span {
-            font-weight: 700;
-        }
+    &_players {
+        margin-top: 0.5rem;
+        display: flex;
+        flex-direction: column;
     }
 
     &_addbutton {
@@ -89,8 +123,38 @@
             }
         }
     }
+
+    &_startgame {
+        border: 1px solid $Dcream;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 1.5rem;
+        height: 1.3rem;
+        margin: 1rem 0 0.5rem;
+
+        &:hover {
+            border-color: $Dlightblue;
+            background-color: $Dlightblue;
+            color: black;
+            cursor: pointer;
+        }
+
+        & > span {
+            margin: 0 0.5rem;
+        }
+    }
 }
 
 .active {
     font-weight: 700;
+    border-color: transparent;
+    
+    &:hover {
+        cursor: auto;
+        font-weight: 700;
+        color: $Dcream;
+        background-color: transparent;
+        border-color: transparent;
+    }
 }
