@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Dreidel/static/css/main.9b429361.css",
+    "main.css": "/Dreidel/static/css/main.dcacb198.css",
     "main.js": "/Dreidel/static/js/main.f838a465.js",
     "index.html": "/Dreidel/index.html",
-    "main.9b429361.css.map": "/Dreidel/static/css/main.9b429361.css.map",
+    "main.dcacb198.css.map": "/Dreidel/static/css/main.dcacb198.css.map",
     "main.f838a465.js.map": "/Dreidel/static/js/main.f838a465.js.map"
   },
   "entrypoints": [
-    "static/css/main.9b429361.css",
+    "static/css/main.dcacb198.css",
     "static/js/main.f838a465.js"
   ]
 }
