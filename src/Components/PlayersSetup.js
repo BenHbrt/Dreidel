@@ -36,7 +36,7 @@ const PlayersSetup = ({ setSettings, setPlayers, refreshPlayers, dreidelType, se
     }
 
     const addPlayer = () => {
-        if (newPlayers.length < 6) {
+        if (newPlayers.length < 6 && newName !== "") {
             const updated = newPlayers.map((player) => {
                 return player
             })

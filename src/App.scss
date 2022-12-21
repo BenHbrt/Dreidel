@@ -42,6 +42,10 @@ body {
         justify-content: space-between;
         height: 100%;
 
+        // @media screen and (min-width: 700px) {
+        //     flex-direction: row;
+        // }
+
         &_playarea {
             display: flex;
             flex-direction: column;
