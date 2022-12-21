@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/Dreidel/static/css/main.dcacb198.css",
-    "main.js": "/Dreidel/static/js/main.f838a465.js",
+    "main.css": "/Dreidel/static/css/main.af9d10c5.css",
+    "main.js": "/Dreidel/static/js/main.fc394471.js",
+    "static/media/hebrew.png": "/Dreidel/static/media/hebrew.cb9b1411a54027177258.png",
     "index.html": "/Dreidel/index.html",
-    "main.dcacb198.css.map": "/Dreidel/static/css/main.dcacb198.css.map",
-    "main.f838a465.js.map": "/Dreidel/static/js/main.f838a465.js.map"
+    "main.af9d10c5.css.map": "/Dreidel/static/css/main.af9d10c5.css.map",
+    "main.fc394471.js.map": "/Dreidel/static/js/main.fc394471.js.map"
   },
   "entrypoints": [
-    "static/css/main.dcacb198.css",
-    "static/js/main.f838a465.js"
+    "static/css/main.af9d10c5.css",
+    "static/js/main.fc394471.js"
   ]
 }
