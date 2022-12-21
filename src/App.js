@@ -6,6 +6,7 @@ import Pot from './Components/Pot';
 import Messages from './Components/Messages';
 import Winner from './Components/Winner';
 import PlayersSetup from './Components/PlayersSetup';
+import About from './Components/About';
 
 import { useState, useEffect, useRef } from 'react'
 
@@ -32,6 +33,7 @@ function App() {
   const [startGeld, setStartGeld] = useState(10)
   const [refreshPlayers, setRefreshPlayers] = useState(null)
   const [winner, setWinner] = useState(null)
+  const [info, setInfo] = useState(null)
   const currentPlayers = () => {
     let i = 0
     players.forEach((player) => {
@@ -225,11 +227,12 @@ function App() {
     <div className="container">
       <div className="container_title">Dreidel</div>
       <nav>
-        <div className="button"><span>About</span></div>
+        <div className="button" onClick={() => setInfo("About")}><span>About</span></div>
         <div className="button"><span>Credits</span></div>
       </nav>
-      {settings && <PlayersSetup setSettings={setSettings} setPlayers={setPlayers} refreshPlayers={refreshPlayers} dreidelType={dreidelType} setDreidelType={setDreidelType} startGeld={startGeld} setStartGeld={setStartGeld} />}
-      {!settings && <div className='container_playing'>
+      {(info === "About") && <About setInfo={setInfo} />}
+      {settings && (info === null) && <PlayersSetup setSettings={setSettings} setPlayers={setPlayers} refreshPlayers={refreshPlayers} dreidelType={dreidelType} setDreidelType={setDreidelType} startGeld={startGeld} setStartGeld={setStartGeld} />}
+      {!settings && (info === null) && <div className='container_playing'>
         <div className="container_playing_playarea">
           <Messages message1={message1} message2={message2} message3={message3} message4={message4}/>
           {!winner && <><Dreidel spinning={spinning} spin={spin} letter={letter} letters={letters} type={dreidelType} />

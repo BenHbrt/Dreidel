@@ -82,7 +82,7 @@ const PlayersSetup = ({ setSettings, setPlayers, refreshPlayers, dreidelType, se
                 </div>
             </div>
             <div className='playerssetup_players'>
-            <div>Enter Players</div>
+            <div>Enter Players:</div>
             <div className='playerssetup_players_input'>
             <input type="text" name="newPlayer" value={newName} onChange={inputName}></input><span className="playerssetup_addbutton" onClick={addPlayer}>+ Add Player</span>
             </div>
