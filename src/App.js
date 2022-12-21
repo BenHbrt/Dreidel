@@ -7,6 +7,7 @@ import Messages from './Components/Messages';
 import Winner from './Components/Winner';
 import PlayersSetup from './Components/PlayersSetup';
 import About from './Components/About';
+import Credits from './Components/Credits';
 
 import { useState, useEffect, useRef } from 'react'
 
@@ -228,9 +229,10 @@ function App() {
       <div className="container_title">Dreidel</div>
       <nav>
         <div className="button" onClick={() => setInfo("About")}><span>About</span></div>
-        <div className="button"><span>Credits</span></div>
+        <div className="button" onClick={() => setInfo("Credits")}><span>Credits</span></div>
       </nav>
       {(info === "About") && <About setInfo={setInfo} />}
+      {(info === "Credits") && <Credits setInfo={setInfo} />}
       {settings && (info === null) && <PlayersSetup setSettings={setSettings} setPlayers={setPlayers} refreshPlayers={refreshPlayers} dreidelType={dreidelType} setDreidelType={setDreidelType} startGeld={startGeld} setStartGeld={setStartGeld} />}
       {!settings && (info === null) && <div className='container_playing'>
         <div className="container_playing_playarea">

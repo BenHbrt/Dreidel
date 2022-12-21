@@ -1,0 +1,46 @@
+@import "../Other/Variables.scss";
+
+.credits {
+    display: flex;
+    flex-direction: column;
+    margin: 0 2rem;
+
+    &_title {
+        font-weight: 700;
+        font-size: 1.5rem;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    &_credits {
+        display: flex;
+        
+        & > img {
+            width: 2rem;
+            margin-right: 0.5rem;
+        }
+    }
+
+    &_button {
+        display: flex;
+        justify-content: center;
+        margin-top: 0.5rem;
+
+        & > span {
+            border: 1px solid $Dcream;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 1.5rem;
+            height: 1.3rem;
+            padding: 0 0.5rem;
+
+            &:hover {
+                border-color: $Dlightblue;
+                background-color: $Dlightblue;
+                color: black;
+                cursor: pointer;
+            }
+        }
+    }
+}
